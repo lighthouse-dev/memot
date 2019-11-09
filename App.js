@@ -10,8 +10,8 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Appbar />
-        <MemoDetailScreen />
         {/* <MemoListScreen /> */}
+        <MemoDetailScreen />
       </View>
     );
   }
