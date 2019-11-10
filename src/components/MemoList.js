@@ -7,17 +7,23 @@ import {
   FlatList
 } from 'react-native';
 
+const dateString = date => {
+  return date
+    .toDate()
+    .toISOString()
+    .split('T')[0];
+};
 class MemoList extends React.Component {
   renderMemo({ item }) {
     return (
       <TouchableHighlight
         onPress={() => {
-          this.props.navigation.navigate('MemoDetailScreen');
+          this.props.navigation.navigate('MemoDetailScreen', { memo: item });
         }}
       >
         <View style={styles.memoListItem}>
-          <Text style={styles.memoTitle}> {item.body} </Text>
-          <Text style={styles.memoDate}> 2019-11-11 </Text>
+          <Text style={styles.memoTitle}>{item.body.substring(0, 10)}</Text>
+          <Text style={styles.memoDate}> {dateString(item.createDate)} </Text>
         </View>
       </TouchableHighlight>
     );
