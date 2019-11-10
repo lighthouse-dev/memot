@@ -12,11 +12,10 @@ class MemoAddScreen extends React.Component {
   handleSubmit() {
     const db = firebase.firestore();
     const { currentUser } = firebase.auth();
-    // db.settings({ timestampsInSnapshots: true });
     db.collection(`users/${currentUser.uid}/memos`)
       .add({
         body: this.state.body,
-        created_at: new Date()
+        createDate: new Date()
       })
       .then(ref => {
         console.log('Added document with ID: ', ref.id);
