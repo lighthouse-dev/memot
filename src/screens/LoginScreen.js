@@ -8,17 +8,43 @@ import {
 } from 'react-native';
 
 class LoginScreen extends React.Component {
+  state = {
+    email: '',
+    password: ''
+  };
+
+  handleSubmit() {
+    this.props.navigation.navigate('MemoListScreen');
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.title}> ログイン </Text>
-        <TextInput style={styles.input} value="Emaail Address" />
-        <TextInput style={styles.input} value="Password" />
+        <TextInput
+          style={styles.input}
+          value={this.state.email}
+          onChangeText={text => {
+            this.setState({ email: text });
+          }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Email Address"
+        />
+        <TextInput
+          style={styles.input}
+          value={this.state.password}
+          onChangeText={text => {
+            this.setState({ password: text });
+          }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Password"
+          secureTextEntry
+        />
         <TouchableHighlight
           style={styles.button}
-          onPress={() => {
-            alert('Login');
-          }}
+          onPress={this.handleSubmit.bind(this)}
         >
           <Text style={styles.buttonTitle}>Login</Text>
         </TouchableHighlight>

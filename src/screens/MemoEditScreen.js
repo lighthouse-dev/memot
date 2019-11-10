@@ -8,7 +8,12 @@ class MemoEditScreen extends React.Component {
     return (
       <View style={styles.container}>
         <TextInput style={styles.memoEditInput} value="Hi" multiline />
-        <CircleButton name="checked" />
+        <CircleButton
+          name="checked"
+          onPress={() => {
+            this.props.navigation.goBack();
+          }}
+        />
       </View>
     );
   }
@@ -20,7 +25,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   memoEditInput: {
-    backgroundColor: '#ddd',
+    backgroundColor: '#FFF',
     flex: 1,
     paddingTop: 32,
     paddingLeft: 16,
