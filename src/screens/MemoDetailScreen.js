@@ -46,12 +46,12 @@ const styles = StyleSheet.create({
   memoHeaderTitle: {
     fontSize: 23,
     fontWeight: 'bold',
-    color: 'white',
+    color: '#FFF',
     marginBottom: 4
   },
   memoHeaderDate: {
     fontSize: 12,
-    color: 'white'
+    color: '#FFF'
   },
   memoContent: {
     flex: 1,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 20,
-    backgroundColor: 'white'
+    backgroundColor: '#FFF'
   },
   editButton: {
     top: 40,

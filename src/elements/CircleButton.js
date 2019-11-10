@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     fontFamily: 'FontAwesome',
     fontSize: 24,
     lineHeight: 32,
-    color: 'white'
+    color: '#FFF'
   }
 });
 
