@@ -6,20 +6,56 @@ import {
   TextInput,
   TouchableHighlight
 } from 'react-native';
+import firebase from 'firebase';
 
 class SignUpScreen extends React.Component {
+  state = {
+    email: '',
+    password: ''
+  };
+
+  handleSubmit() {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(user => {
+        console.log('login success!', user);
+        this.props.navigation.navigate('MemoListScreen');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.title}> ユーザー登録 </Text>
-        <TextInput style={styles.input} value="Emaail Address" />
-        <TextInput style={styles.input} value="Password" />
+        <TextInput
+          style={styles.input}
+          value={this.state.email}
+          onChangeText={text => {
+            this.setState({ email: text });
+          }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Email Address"
+        />
+        <TextInput
+          style={styles.input}
+          value={this.state.password}
+          onChangeText={text => {
+            this.setState({ password: text });
+          }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Password"
+          secureTextEntry
+        />
         <TouchableHighlight
           style={styles.button}
           underlayColor="#c93467"
-          onPress={() => {
-            alert('Sign up');
-          }}
+          onPress={this.handleSubmit.bind(this)}
         >
           <Text style={styles.buttonTitle}> Sign up </Text>
         </TouchableHighlight>
