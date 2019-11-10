@@ -20,7 +20,7 @@ class LoginScreen extends React.Component {
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(user => {
         console.log('login success', user);
-        this.props.navigation.navigate('MemoListScreen', { currentUser: user });
+        this.props.navigation.navigate('MemoListScreen');
       })
       .catch(err => {
         console.log(err);
