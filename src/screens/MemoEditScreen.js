@@ -30,7 +30,6 @@ class MemoEditScreen extends React.Component {
         body: this.state.body
       })
       .then(() => {
-        console.log('update success.');
         const { navigation } = this.props;
         navigation.state.params.returnMemo({
           key: this.state.key,
@@ -39,9 +38,7 @@ class MemoEditScreen extends React.Component {
         });
         this.props.navigation.goBack();
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(() => {});
   }
 
   render() {

@@ -17,12 +17,10 @@ class MemoAddScreen extends React.Component {
         body: this.state.body,
         createDate: new Date()
       })
-      .then(ref => {
-        console.log('Added document with ID: ', ref.id);
+      .then(() => {
+        this.props.navigation.goBack();
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(() => {});
   }
 
   render() {

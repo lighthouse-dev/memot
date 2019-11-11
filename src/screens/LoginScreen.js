@@ -4,9 +4,11 @@ import {
   View,
   Text,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  TouchableOpacity
 } from 'react-native';
 import firebase from 'firebase';
+import { StackActions, NavigationActions } from 'react-navigation';
 
 class LoginScreen extends React.Component {
   state = {
@@ -18,13 +20,19 @@ class LoginScreen extends React.Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(user => {
-        console.log('login success', user);
-        this.props.navigation.navigate('MemoListScreen');
+      .then(() => {
+        const resetAction = StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'MemoListScreen' })]
+        });
+
+        this.props.navigation.dispatch(resetAction);
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(() => {});
+  }
+
+  handlePress() {
+    this.props.navigation.navigate('SignUpScreen');
   }
 
   render() {
@@ -58,6 +66,13 @@ class LoginScreen extends React.Component {
         >
           <Text style={styles.buttonTitle}>Login</Text>
         </TouchableHighlight>
+
+        <TouchableOpacity
+          style={styles.signup}
+          onPress={this.handlePress.bind(this)}
+        >
+          <Text style={styles.signupText}> ➕ Sign up </Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -97,6 +112,13 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 18,
     fontWeight: 'bold'
+  },
+  signup: {
+    alignSelf: 'center',
+    marginTop: 20
+  },
+  signupText: {
+    fontSize: 16
   }
 });
 

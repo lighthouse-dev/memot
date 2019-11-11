@@ -18,7 +18,6 @@ class MemoListScreen extends React.Component {
       const tempMemoList = [];
       snapshot.forEach(doc => {
         tempMemoList.push({ key: doc.id, ...doc.data() });
-        console.log(doc.id, '=>', doc.data());
       });
       this.setState({ memoList: tempMemoList });
     });
