@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import firebase from 'firebase';
@@ -41,9 +41,15 @@ const App = createStackNavigator(
       headerStyle: {
         backgroundColor: '#3F52B5',
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.5,
-        shadowRadius: 3
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+        ...Platform.select({
+          ios: {},
+          android: {
+            height: 60
+          }
+        })
       },
       headerTitleStyle: {
         color: '#FFF',

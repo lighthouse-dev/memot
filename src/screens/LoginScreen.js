@@ -48,6 +48,7 @@ class LoginScreen extends React.Component {
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Email Address"
+          underlineColorAndroid="transparent"
         />
         <TextInput
           style={styles.input}
@@ -59,10 +60,12 @@ class LoginScreen extends React.Component {
           autoCorrect={false}
           placeholder="Password"
           secureTextEntry
+          underlineColorAndroid="transparent"
         />
         <TouchableHighlight
           style={styles.button}
           onPress={this.handleSubmit.bind(this)}
+          underlayColor="#c93467"
         >
           <Text style={styles.buttonTitle}>Login</Text>
         </TouchableHighlight>

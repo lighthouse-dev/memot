@@ -53,6 +53,8 @@ class MemoEditScreen extends React.Component {
             });
           }}
           multiline
+          underlineColorAndroid="transparent"
+          textAlignVertical="top"
         />
         <CircleButton name="checked" onPress={this.handlePress.bind(this)} />
       </View>

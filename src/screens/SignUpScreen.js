@@ -43,6 +43,7 @@ class SignUpScreen extends React.Component {
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Email Address"
+          underlineColorAndroid="transparent"
         />
         <TextInput
           style={styles.input}
@@ -54,6 +55,7 @@ class SignUpScreen extends React.Component {
           autoCorrect={false}
           placeholder="Password"
           secureTextEntry
+          underlineColorAndroid="transparent"
         />
         <TouchableHighlight
           style={styles.button}

@@ -33,6 +33,7 @@ class MemoAddScreen extends React.Component {
           onChangeText={text => {
             this.setState({ body: text });
           }}
+          textAlignVertical="top"
         />
         <CircleButton name="checked" onPress={this.handleSubmit.bind(this)} />
       </View>
