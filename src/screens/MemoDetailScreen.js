@@ -3,6 +3,10 @@ import { StyleSheet, View, Text } from 'react-native';
 import CircleButton from '../elements/CircleButton';
 
 const dateString = date => {
+  if (date == null) {
+    return '';
+  }
+
   return date
     .toDate()
     .toISOString()
@@ -30,7 +34,7 @@ class MemoDetailScreen extends React.Component {
           <View style={styles.memoHeader}>
             <View>
               <Text style={styles.memoHeaderTitle}>
-                {memo.body.substring(0, 10)}
+                {memo.body ? memo.body.substring(0, 10) : ''}
               </Text>
               <Text style={styles.memoHeaderDate}>
                 {dateString(memo.createDate)}

@@ -8,6 +8,10 @@ import {
 } from 'react-native';
 
 const dateString = date => {
+  if (date == null) {
+    return '';
+  }
+
   return date
     .toDate()
     .toISOString()
