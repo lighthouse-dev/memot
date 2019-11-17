@@ -7,26 +7,50 @@ import {
   TouchableHighlight,
   TouchableOpacity
 } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 import firebase from 'firebase';
 import { StackActions, NavigationActions } from 'react-navigation';
+import Loading from '../elements/Loading';
 
 class LoginScreen extends React.Component {
   state = {
     email: '',
-    password: ''
+    password: '',
+    isLoading: true
   };
+
+  async componentDidMount() {
+    // 画面がレンダリングされた後に実行する
+    const email = await SecureStore.getItemAsync('email');
+    const password = await SecureStore.getItemAsync('password');
+
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({ isLoading: false });
+        this.navigateToHome();
+      })
+      .catch(() => {});
+  }
+
+  navigateToHome() {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'MemoListScreen' })]
+    });
+
+    this.props.navigation.dispatch(resetAction);
+  }
 
   handleSubmit() {
     firebase
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-        const resetAction = StackActions.reset({
-          index: 0,
-          actions: [NavigationActions.navigate({ routeName: 'MemoListScreen' })]
-        });
-
-        this.props.navigation.dispatch(resetAction);
+        SecureStore.setItemAsync('email', this.state.email);
+        SecureStore.setItemAsync('password', this.state.password);
+        this.navigateToHome();
       })
       .catch(() => {});
   }
@@ -38,6 +62,7 @@ class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Loading text="Loading..." isLoading={this.state.isLoading} />
         <Text style={styles.title}> ログイン </Text>
         <TextInput
           style={styles.input}
