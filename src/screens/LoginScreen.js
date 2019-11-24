@@ -24,6 +24,10 @@ class LoginScreen extends React.Component {
     const email = await SecureStore.getItemAsync('email');
     const password = await SecureStore.getItemAsync('password');
 
+    if (email == null || password == null) {
+      this.setState({ isLoading: false });
+    }
+
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -31,7 +35,9 @@ class LoginScreen extends React.Component {
         this.setState({ isLoading: false });
         this.navigateToHome();
       })
-      .catch(() => {});
+      .catch(() => {
+        this.setState({ isLoading: false });
+      });
   }
 
   navigateToHome() {
